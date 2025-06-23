@@ -14,6 +14,10 @@ print("✅ Job Description Sample:\n", jd_text[:500])
 
 
 import spacy
+import spacy.cli
+
+# Ensure the model is downloaded on deployment
+spacy.cli.download("en_core_web_sm")
 
 # Load English NLP model
 nlp = spacy.load("en_core_web_sm")
