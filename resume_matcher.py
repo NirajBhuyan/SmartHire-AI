@@ -3,8 +3,11 @@ import spacy.cli
 from sentence_transformers import SentenceTransformer, util
 
 # Download spaCy model (safe on Streamlit)
-spacy.cli.download("en_core_web_sm")
-nlp = spacy.load("en_core_web_sm")
+try:
+    nlp = spacy.load("en_core_web_sm")
+except:
+    spacy.cli.download("en_core_web_sm")
+    nlp = spacy.load("en_core_web_sm")
 
 # Load SentenceTransformer model once
 bert_model = SentenceTransformer('all-MiniLM-L6-v2')
