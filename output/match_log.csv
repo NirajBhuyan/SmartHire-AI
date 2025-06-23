@@ -1,0 +1,4 @@
+Date,Match %,Semantic Score,Matched Skills,Missing Skills
+2025-06-23 10:02:54,33.33,67.6,"pandas, communication, python, numpy","azure, statistics, matplotlib, tableau, aws, nlp, tensorflow, pytorch"
+2025-06-23 10:21:18,33.33,67.6,"communication, python, pandas, numpy","nlp, tensorflow, tableau, pytorch, statistics, matplotlib, aws, azure"
+2025-06-23 11:04:21,33.33,67.6,"communication, python, numpy, pandas","aws, tableau, pytorch, nlp, tensorflow, statistics, azure, matplotlib"
