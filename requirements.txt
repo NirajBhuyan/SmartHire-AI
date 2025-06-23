@@ -6,3 +6,4 @@ sentence-transformers
 scikit-learn
 matplotlib
 PyPDF2
+spacy
