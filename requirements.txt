@@ -5,3 +5,4 @@ pdfplumber
 sentence-transformers
 scikit-learn
 matplotlib
+PyPDF2
