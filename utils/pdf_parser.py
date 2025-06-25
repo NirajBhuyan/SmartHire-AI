@@ -1,5 +1,5 @@
 import PyPDF2
-import docx
+from docx import Document
 
 def extract_text_from_pdf(file_path):
     try:
@@ -16,7 +16,7 @@ def extract_text_from_pdf(file_path):
 
 def extract_text_from_docx(file_path):
     try:
-        doc = docx.Document(file_path)
+        doc = Document(file_path)
         text = ''
         for para in doc.paragraphs:
             text += para.text + '\n'
