@@ -3,6 +3,7 @@ import os
 import pandas as pd
 from logger import log_results
 from utils.pdf_parser import extract_text
+from huggingface_api import get_semantic_similarity
 
 try:
     from resume_matcher import extract_skills, match_skills
@@ -67,11 +68,14 @@ with tab1:
             resume_skills = extract_skills(resume_text)
             jd_skills = extract_skills(jd_text)
             matched_skills, missing_skills, match_percent = match_skills(resume_skills, jd_skills)
-
-            log_results(match_percent, 0.0, matched_skills, missing_skills)  # semantic score = 0.0
+            semantic_score = get_semantic_similarity(resume_text, jd_text)
+            
+            log_results(match_percent, semantic_score, matched_skills, missing_skills) 
 
             st.markdown("## 🧠 Analysis Results")
-            st.metric("Skill Match %", f"{match_percent}%")
+            col1, col2 = st.columns(2)
+            col1.metric("Skill Match %", f"{match_percent}%")
+            col2.metric("Semantic Similarity", f"{semantic_score}%")
 
             with st.expander("📄 View Extracted Resume Text"):
                 st.text(resume_text)
