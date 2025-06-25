@@ -1,3 +1,6 @@
+import streamlit as st
+st.write("📦 Entered resume_matcher.py")
+
 from utils.pdf_parser import extract_text_from_pdf
 
 import spacy
@@ -11,9 +14,11 @@ if not spacy.util.is_package("en_core_web_sm"):
     spacy.cli.download("en_core_web_sm")
 
 nlp = spacy.load("en_core_web_sm")
+st.write("✅ spaCy model loaded")
 
 # Load BERT model only once
 bert_model = SentenceTransformer('all-MiniLM-L6-v2')
+st.write("✅ BERT model loaded")
 
 # Define a basic skill list (expand later or use a skill ontology API)
 skill_keywords = [
