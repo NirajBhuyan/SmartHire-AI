@@ -1,17 +1,25 @@
+import streamlit as st
+st.write("✅ Checkpoint 1: App started")
+
 import os
 import pandas as pd
 from logger import log_results
+
+st.write("✅ Checkpoint 2: All imports successful")
+
 #from recommendations import recommend_skills
-import streamlit as st
 from utils.pdf_parser import extract_text
 from resume_matcher import extract_skills, match_skills, get_semantic_score
 import matplotlib.pyplot as plt
+st.write("✅ Checkpoint 3: Custom modules loaded")
 
 st.set_page_config(
     page_title="SmartHire AI",
     layout="wide",  # modern wide layout
     initial_sidebar_state="collapsed"
 )
+
+st.write("✅ Checkpoint 4: Page config set")
 
 st.markdown("""
     <style>
@@ -33,45 +41,59 @@ st.markdown("""
 
 st.markdown("<h1 class='title-text'>🤖 SmartHire AI</h1>", unsafe_allow_html=True)
 st.markdown("<p class='subheader-text'>AI-powered Resume Matcher & Career Recommender</p>", unsafe_allow_html=True)
+st.write("✅ Checkpoint 5: Header rendered")
 
 tab1, tab2 = st.tabs(["📂 Resume Matcher", "📊 Match History"])
-
+st.write("✅ Checkpoint 6: Tabs loaded")
 
 with tab1:
 
     resume_file = st.file_uploader("Upload Resume (PDF or DOCX)", type=["pdf", "docx"])
     jd_file = st.file_uploader("Upload Job Description (PDF or DOCX)", type=["pdf", "docx"])
+    st.write("✅ Checkpoint 7: File uploaders shown")
 
+    
     if resume_file and jd_file:
+        st.write("✅ Checkpoint 8: Files uploaded")
+
         # Upload & Save
-        resume_ext = resume_file.name.split('.')[-1].lower()
-        jd_ext = jd_file.name.split('.')[-1].lower()
+        try: 
+            resume_ext = resume_file.name.split('.')[-1].lower()
+            jd_ext = jd_file.name.split('.')[-1].lower()
 
-        resume_path = f"temp_resume.{resume_ext}"
-        jd_path = f"temp_jd.{jd_ext}"
+            resume_path = f"temp_resume.{resume_ext}"
+            jd_path = f"temp_jd.{jd_ext}"
 
-        with open(resume_path, "wb") as f:
-            f.write(resume_file.read())
-        with open(jd_path, "wb") as f:
-            f.write(jd_file.read())
+            with open(resume_path, "wb") as f:
+                f.write(resume_file.read())
+            with open(jd_path, "wb") as f:
+                f.write(jd_file.read())
+
+            st.write("✅ Checkpoint 9: Files saved")
 
         # Text Extraction
-        resume_text = extract_text(resume_path)
-        jd_text = extract_text(jd_path)
+            resume_text = extract_text(resume_path)
+            jd_text = extract_text(jd_path)
+            st.write("✅ Checkpoint 10: Text extracted")
 
         # Skill Matching
-        resume_skills = extract_skills(resume_text)
-        jd_skills = extract_skills(jd_text)
-        matched_skills, missing_skills, match_percent = match_skills(resume_skills, jd_skills)
-        semantic_score = get_semantic_score(resume_text, jd_text)
+            resume_skills = extract_skills(resume_text)
+            jd_skills = extract_skills(jd_text)
+            matched_skills, missing_skills, match_percent = match_skills(resume_skills, jd_skills)
+            semantic_score = get_semantic_score(resume_text, jd_text)
+            st.write("✅ Checkpoint 11: Skills matched and semantic score calculated")
+            
+            log_results(match_percent, semantic_score, matched_skills, missing_skills)
+            st.write("✅ Checkpoint 12: Results logged")
 
-        log_results(match_percent, semantic_score, matched_skills, missing_skills)
-
-        # 📊 Metrics
-        st.markdown("## 🧠 Analysis Results")
-        col1, col2 = st.columns(2)
-        col1.metric("Skill Match %", f"{match_percent}%")
-        col2.metric("Semantic Similarity", f"{semantic_score}%")
+        except Exception as e:
+            st.error(f"❌ Error during processing: {e}")
+            
+            # 📊 Metrics
+            st.markdown("## 🧠 Analysis Results")
+            col1, col2 = st.columns(2)
+            col1.metric("Skill Match %", f"{match_percent}%")
+            col2.metric("Semantic Similarity", f"{semantic_score}%")
 
         # Expanders
         with st.expander("📄 View Extracted Resume Text"):
@@ -82,11 +104,11 @@ with tab1:
             st.markdown(f"**Missing Skills:** {', '.join(missing_skills) or 'None'}")
 
         # Charts
-        fig1, ax1 = plt.subplots()
-        ax1.pie([len(matched_skills), len(missing_skills)], labels=['Matched', 'Missing'],
+            fig1, ax1 = plt.subplots()
+            ax1.pie([len(matched_skills), len(missing_skills)], labels=['Matched', 'Missing'],
                 colors=['#4CAF50', '#FF5722'], autopct='%1.1f%%', startangle=90)
-        ax1.axis('equal')
-        st.pyplot(fig1)
+            ax1.axis('equal')
+            st.pyplot(fig1)
 
         fig2, ax2 = plt.subplots()
         ax2.bar(['Resume Skills', 'JD Skills', 'Matched'], 
