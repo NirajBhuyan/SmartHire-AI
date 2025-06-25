@@ -6,19 +6,29 @@ from utils.pdf_parser import extract_text_from_pdf
 import spacy
 import spacy.cli
 import importlib.util
-
 from sentence_transformers import SentenceTransformer, util
 
-# Download spaCy model (safe on Streamlit)
-if not spacy.util.is_package("en_core_web_sm"):
-    spacy.cli.download("en_core_web_sm")
+st.write("🔄 Checking spaCy model...")
 
-nlp = spacy.load("en_core_web_sm")
-st.write("✅ spaCy model loaded")
+# Download spaCy model (safe on Streamlit)
+
+try:
+    if not spacy.util.is_package("en_core_web_sm"):
+        spacy.cli.download("en_core_web_sm")
+    nlp = spacy.load("en_core_web_sm")
+    st.write("✅ spaCy model loaded")
+except Exception as e:
+    st.error("❌ Failed to load spaCy model")
+    st.text(str(e))
 
 # Load BERT model only once
-bert_model = SentenceTransformer('all-MiniLM-L6-v2')
-st.write("✅ BERT model loaded")
+st.write("🔄 Loading BERT model...")
+try:
+    bert_model = SentenceTransformer('all-MiniLM-L6-v2')
+    st.write("✅ BERT model loaded")
+except Exception as e:
+    st.error("❌ Failed to load BERT model")
+    st.text(str(e))
 
 # Define a basic skill list (expand later or use a skill ontology API)
 skill_keywords = [
