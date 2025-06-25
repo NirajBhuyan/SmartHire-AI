@@ -69,6 +69,15 @@ with tab1:
     jd_file = st.file_uploader("Upload Job Description (PDF or DOCX)", type=["pdf", "docx"])
     st.write("✅ Checkpoint 7: File uploaders shown")
 
+    resume_text = extract_text(resume_path)
+    jd_text = extract_text(jd_path)
+
+    st.success("✅ Resume Extracted")
+    st.text(resume_text[:300])  # Show first 300 characters
+
+    st.success("✅ JD Extracted")
+    st.text(jd_text[:300])
+
     
     if resume_file and jd_file:
         st.write("✅ Checkpoint 8: Files uploaded")
