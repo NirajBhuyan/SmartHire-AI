@@ -30,5 +30,5 @@ def get_semantic_similarity(resume_text, jd_text):
             return 0.0
 
     except Exception as e:
-        print(f"❌ Exception: {str(e)}")
+        print(f"❌ Exception in HuggingFace API: {str(e)}")
         return 0.0
