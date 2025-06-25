@@ -1,12 +1,14 @@
 import requests
+import os
 
 API_URL = "https://api-inference.huggingface.co/models/sentence-transformers/all-MiniLM-L6-v2"
-HEADERS = {"Authorization": "Bearer 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"}
+HEADERS = {
+    "Authorization": f"Bearer {os.getenv('HF_TOKEN', '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')}"
+}
 
 def get_semantic_similarity(resume_text, jd_text):
     try:
         if not resume_text.strip() or not jd_text.strip():
-            print("❌ Empty resume or JD text.")
             return 0.0
 
         payload = {
@@ -26,9 +28,9 @@ def get_semantic_similarity(resume_text, jd_text):
                 print("⚠️ Unexpected format:", result)
                 return 0.0
         else:
-            print(f"❌ API Error {res.status_code}: {res.text}")
+            print(f"❌ Hugging Face API Error: {res.status_code} - {res.text}")
             return 0.0
 
     except Exception as e:
-        print(f"❌ Exception in HuggingFace API: {str(e)}")
+        print("❌ Exception in get_semantic_similarity:", str(e))
         return 0.0
