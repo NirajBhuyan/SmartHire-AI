@@ -1,42 +1,32 @@
 import streamlit as st
-st.write("✅ Checkpoint 1: App started")
-
 import os
 import pandas as pd
 from logger import log_results
-import logging
-
-st.write("✅ Checkpoint 2: All imports successful")
+#import logging
 
 #from recommendations import recommend_skills
 from utils.pdf_parser import extract_text
-st.write("✅ Checkpoint 2.1: pdf_parser imported")
 
 try:
-    from resume_matcher import extract_skills, match_skills, get_semantic_score
-    st.write("✅ Checkpoint 2.2: resume_matcher imported")
+    from resume_matcher import extract_skills, match_skills
+    #,get_semantic_score
 except Exception as e:
     import traceback
     st.error("❌ Failed to import resume_matcher")
     st.text(traceback.format_exc())
 
 import matplotlib.pyplot as plt
-st.write("✅ Checkpoint 2.3: matplotlib imported")
-
-st.write("✅ Checkpoint 3: Custom modules loaded")
 
 # ✅ Logging setup
-logging.basicConfig(level=logging.DEBUG)
-st.write("📋 Logging started...")
-logging.debug("✅ Checkpoint: App started")
+#logging.basicConfig(level=logging.DEBUG)
+#st.write("📋 Logging started...")
+#logging.debug("✅ Checkpoint: App started")
 
 st.set_page_config(
     page_title="SmartHire AI",
     layout="centered",  # modern wide layout
     initial_sidebar_state="collapsed"
 )
-
-st.write("✅ Checkpoint 4: Page config set")
 
 st.markdown("""
     <style>
@@ -58,20 +48,16 @@ st.markdown("""
 
 st.markdown("<h1 class='title-text'>🤖 SmartHire AI</h1>", unsafe_allow_html=True)
 st.markdown("<p class='subheader-text'>AI-powered Resume Matcher & Career Recommender</p>", unsafe_allow_html=True)
-st.write("✅ Checkpoint 5: Header rendered")
 
 tab1, tab2 = st.tabs(["📂 Resume Matcher", "📊 Match History"])
-st.write("✅ Checkpoint 6: Tabs loaded")
 
 with tab1:
 
     resume_file = st.file_uploader("Upload Resume (PDF or DOCX)", type=["pdf", "docx"])
     jd_file = st.file_uploader("Upload Job Description (PDF or DOCX)", type=["pdf", "docx"])
-    st.write("✅ Checkpoint 7: File uploaders shown")
 
     if resume_file and jd_file:
-        st.write("✅ Checkpoint 8: Files uploaded")
-
+        
         try: 
             # Save uploaded files temporarily
             resume_ext = resume_file.name.split('.')[-1].lower()
@@ -85,26 +71,23 @@ with tab1:
             with open(jd_path, "wb") as f:
                 f.write(jd_file.read())
 
-            st.write("✅ Checkpoint 9: Files saved")
-
             # Text Extraction
             resume_text = extract_text(resume_path)
             jd_text = extract_text(jd_path)
             st.success("✅ Resume Extracted")
-            st.text(resume_text[:300])  # show preview
+            #st.text(resume_text[:300])  # show preview
             st.success("✅ JD Extracted")
-            st.text(jd_text[:300])
-            st.write("✅ Checkpoint 10: Text extracted")
+            #st.text(jd_text[:300])
 
             # Skill Matching
             resume_skills = extract_skills(resume_text)
             jd_skills = extract_skills(jd_text)
             matched_skills, missing_skills, match_percent = match_skills(resume_skills, jd_skills)
-            semantic_score = get_semantic_score(resume_text, jd_text)
-            st.write("✅ Checkpoint 11: Skills matched and semantic score calculated")
+            #semantic_score = get_semantic_score(resume_text, jd_text)
+            #st.write("✅ Checkpoint 11: Skills matched and semantic score calculated")
 
             log_results(match_percent, semantic_score, matched_skills, missing_skills)
-            st.write("✅ Checkpoint 12: Results logged")
+            #st.write("✅ Checkpoint 12: Results logged")
 
             # 📊 Metrics
             st.markdown("## 🧠 Analysis Results")
