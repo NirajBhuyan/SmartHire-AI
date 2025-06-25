@@ -1,7 +1,7 @@
 import requests
 
 API_URL = "https://api-inference.huggingface.co/models/sentence-transformers/all-MiniLM-L6-v2"
-HEADERS = {"Authorization": "Bearer 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"}
+HEADERS = {"Authorization": "Bearer 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"}
 
 def get_semantic_similarity(resume_text, jd_text):
     try:
