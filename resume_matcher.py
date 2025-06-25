@@ -6,7 +6,7 @@ from utils.pdf_parser import extract_text_from_pdf
 import spacy
 import spacy.cli
 import importlib.util
-from sentence_transformers import SentenceTransformer, util
+#from sentence_transformers import SentenceTransformer, util
 
 st.write("🔄 Checking spaCy model...")
 
@@ -34,13 +34,13 @@ except OSError:
 #    st.text(str(e))
 
 # Load BERT model only once
-st.write("🔄 Loading BERT model...")
-try:
-    bert_model = SentenceTransformer('all-MiniLM-L6-v2')
-    st.success("✅ BERT model loaded")
-except Exception as e:
-    st.error("❌ Failed to load BERT model")
-    st.text(str(e))
+#st.write("🔄 Loading BERT model...")
+#try:
+#    bert_model = SentenceTransformer('all-MiniLM-L6-v2')
+#    st.success("✅ BERT model loaded")
+#except Exception as e:
+#    st.error("❌ Failed to load BERT model")
+#    st.text(str(e))
 
 # Define a basic skill list (expand later or use a skill ontology API)
 skill_keywords = [
@@ -65,6 +65,8 @@ def match_skills(resume_skills, jd_skills):
 
 def get_semantic_score(resume_text, jd_text):
     try:
+        from sentence_transformers import SentenceTransformer, util
+        bert_model = SentenceTransformer('all-MiniLM-L6-v2')
         resume_emb = bert_model.encode(resume_text, convert_to_tensor=True)
         jd_emb = bert_model.encode(jd_text, convert_to_tensor=True)
         score = util.pytorch_cos_sim(resume_emb, jd_emb)
