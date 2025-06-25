@@ -7,3 +7,8 @@ scikit-learn
 matplotlib
 PyPDF2
 spacy
+pyMuPDF
+numpy
+pdfminer.six
+regex
+nltk
