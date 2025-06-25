@@ -118,7 +118,12 @@ with tab1:
 
 
 with tab2:
+
+    if not os.path.exists("output"):
+        os.makedirs("output")
+    
     st.markdown("## 📋 Match History Log")
+    
     if os.path.exists("output/match_log.csv"):
         log_df = pd.read_csv("output/match_log.csv")
         st.dataframe(log_df)
