@@ -1,22 +1,24 @@
 import requests
-import streamlit as st
 
-def get_semantic_similarity(text1, text2):
-    token = st.secrets["huggingface"]["api_token"]
-    api_url = "https://api-inference.huggingface.co/models/sentence-transformers/all-MiniLM-L6-v2"
-    
-    headers = {"Authorization": f"Bearer {token}"}
-    payload = {
-        "inputs": {
-            "source_sentence": text1,
-            "sentences": [text2]
+API_URL = "https://api-inference.huggingface.co/models/sentence-transformers/all-MiniLM-L6-v2"
+HEADERS = {"Authorization": "Bearer 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"}
+
+def get_semantic_similarity(resume_text, jd_text):
+    try:
+        payload = {
+            "inputs": {
+                "source_sentence": resume_text,
+                "sentences": [jd_text]
+            }
         }
-    }
+        response = requests.post(API_URL, headers=HEADERS, json=payload)
 
-    response = requests.post(api_url, headers=headers, json=payload)
-    if response.status_code == 200:
-        score = response.json()[0]
-        return round(score * 100, 2)
-    else:
-        print(f"Error from HuggingFace API: {response.status_code}, {response.text}")
+        if response.status_code == 200:
+            score = response.json()[0]  # It should return a list with a float value
+            return round(score * 100, 2)
+        else:
+            print("Error from Hugging Face:", response.status_code, response.text)
+            return 0.0
+    except Exception as e:
+        print("Exception in get_semantic_similarity:", str(e))
         return 0.0
