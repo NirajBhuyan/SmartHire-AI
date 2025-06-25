@@ -32,7 +32,7 @@ logging.debug("✅ Checkpoint: App started")
 
 st.set_page_config(
     page_title="SmartHire AI",
-    layout="wide",  # modern wide layout
+    layout="centered",  # modern wide layout
     initial_sidebar_state="collapsed"
 )
 
