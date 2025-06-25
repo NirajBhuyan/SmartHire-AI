@@ -15,8 +15,9 @@ try:
     from resume_matcher import extract_skills, match_skills, get_semantic_score
     st.write("✅ Checkpoint 2.2: resume_matcher imported")
 except Exception as e:
+    import traceback
     st.error("❌ Failed to import resume_matcher")
-    st.exception(e) 
+    st.text(traceback.format_exc())
 
 import matplotlib.pyplot as plt
 st.write("✅ Checkpoint 2.3: matplotlib imported")
