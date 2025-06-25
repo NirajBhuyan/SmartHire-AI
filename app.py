@@ -6,11 +6,6 @@ import pandas as pd
 from logger import log_results
 import logging
 
-# ✅ Logging setup
-logging.basicConfig(level=logging.DEBUG)
-st.write("📋 Logging started...")
-logging.debug("✅ Checkpoint: App started")
-
 st.write("✅ Checkpoint 2: All imports successful")
 
 #from recommendations import recommend_skills
@@ -29,6 +24,11 @@ import matplotlib.pyplot as plt
 st.write("✅ Checkpoint 2.3: matplotlib imported")
 
 st.write("✅ Checkpoint 3: Custom modules loaded")
+
+# ✅ Logging setup
+logging.basicConfig(level=logging.DEBUG)
+st.write("📋 Logging started...")
+logging.debug("✅ Checkpoint: App started")
 
 st.set_page_config(
     page_title="SmartHire AI",
