@@ -13,6 +13,9 @@ st.write("✅ Checkpoint 2.1: pdf_parser imported")
 
 from resume_matcher import extract_skills, match_skills, get_semantic_score
 st.write("✅ Checkpoint 2.2: resume_matcher imported")
+except Exception as e:
+    st.error("❌ Failed to import resume_matcher")
+    st.exception(e) 
 
 import matplotlib.pyplot as plt
 st.write("✅ Checkpoint 2.3: matplotlib imported")
