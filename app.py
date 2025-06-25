@@ -69,21 +69,11 @@ with tab1:
     jd_file = st.file_uploader("Upload Job Description (PDF or DOCX)", type=["pdf", "docx"])
     st.write("✅ Checkpoint 7: File uploaders shown")
 
-    resume_text = extract_text(resume_path)
-    jd_text = extract_text(jd_path)
-
-    st.success("✅ Resume Extracted")
-    st.text(resume_text[:300])  # Show first 300 characters
-
-    st.success("✅ JD Extracted")
-    st.text(jd_text[:300])
-
-    
     if resume_file and jd_file:
         st.write("✅ Checkpoint 8: Files uploaded")
 
-        # Upload & Save
         try: 
+            # Save uploaded files temporarily
             resume_ext = resume_file.name.split('.')[-1].lower()
             jd_ext = jd_file.name.split('.')[-1].lower()
 
@@ -97,50 +87,55 @@ with tab1:
 
             st.write("✅ Checkpoint 9: Files saved")
 
-        # Text Extraction
+            # Text Extraction
             resume_text = extract_text(resume_path)
             jd_text = extract_text(jd_path)
+            st.success("✅ Resume Extracted")
+            st.text(resume_text[:300])  # show preview
+            st.success("✅ JD Extracted")
+            st.text(jd_text[:300])
             st.write("✅ Checkpoint 10: Text extracted")
 
-        # Skill Matching
+            # Skill Matching
             resume_skills = extract_skills(resume_text)
             jd_skills = extract_skills(jd_text)
             matched_skills, missing_skills, match_percent = match_skills(resume_skills, jd_skills)
             semantic_score = get_semantic_score(resume_text, jd_text)
             st.write("✅ Checkpoint 11: Skills matched and semantic score calculated")
-            
+
             log_results(match_percent, semantic_score, matched_skills, missing_skills)
             st.write("✅ Checkpoint 12: Results logged")
 
-        except Exception as e:
-            st.error(f"❌ Error during processing: {e}")
-            
             # 📊 Metrics
             st.markdown("## 🧠 Analysis Results")
             col1, col2 = st.columns(2)
             col1.metric("Skill Match %", f"{match_percent}%")
             col2.metric("Semantic Similarity", f"{semantic_score}%")
 
-        # Expanders
-        with st.expander("📄 View Extracted Resume Text"):
-            st.text(resume_text)
+            # Expanders
+            with st.expander("📄 View Extracted Resume Text"):
+                st.text(resume_text)
 
-        with st.expander("🎯 Matched & Missing Skills"):
-            st.markdown(f"**Matched Skills:** {', '.join(matched_skills) or 'None'}")
-            st.markdown(f"**Missing Skills:** {', '.join(missing_skills) or 'None'}")
+            with st.expander("🎯 Matched & Missing Skills"):
+                st.markdown(f"**Matched Skills:** {', '.join(matched_skills) or 'None'}")
+                st.markdown(f"**Missing Skills:** {', '.join(missing_skills) or 'None'}")
 
-        # Charts
+            # Charts
             fig1, ax1 = plt.subplots()
             ax1.pie([len(matched_skills), len(missing_skills)], labels=['Matched', 'Missing'],
-                colors=['#4CAF50', '#FF5722'], autopct='%1.1f%%', startangle=90)
+                    colors=['#4CAF50', '#FF5722'], autopct='%1.1f%%', startangle=90)
             ax1.axis('equal')
             st.pyplot(fig1)
 
-        fig2, ax2 = plt.subplots()
-        ax2.bar(['Resume Skills', 'JD Skills', 'Matched'], 
-                [len(resume_skills), len(jd_skills), len(matched_skills)],
-                color=['#2196F3', '#9C27B0', '#4CAF50'])
-        st.pyplot(fig2)
+            fig2, ax2 = plt.subplots()
+            ax2.bar(['Resume Skills', 'JD Skills', 'Matched'], 
+                    [len(resume_skills), len(jd_skills), len(matched_skills)],
+                    color=['#2196F3', '#9C27B0', '#4CAF50'])
+            st.pyplot(fig2)
+
+        except Exception as e:
+            st.error(f"❌ Error during processing: {e}")
+            st.stop()
 
 
 with tab2:
