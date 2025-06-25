@@ -12,16 +12,7 @@ st.write("🔄 Checking spaCy model...")
 
 # Download spaCy model (safe on Streamlit)
 
-try:
-    nlp = spacy.load("en_core_web_sm")
-    st.success("✅ spaCy model loaded")
-except OSError:
-  #  import subprocess
-  #  subprocess.run(["python", "-m", "spacy", "download", "en_core_web_sm"])
-  #  nlp = spacy.load("en_core_web_sm")
-  #  st.success("✅ spaCy model loaded successfully")
-    st.error("❌ spaCy model not found! Please manually add 'en_core_web_sm' to requirements.txt")
-    st.stop()  # Prevent app from running further
+nlp = spacy.load("en_core_web_sm")
 
 #try:
 #    if not spacy.util.is_package("en_core_web_sm"):
