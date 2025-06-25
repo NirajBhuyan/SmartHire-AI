@@ -78,8 +78,6 @@ with tab1:
             col1, col2 = st.columns(2)
             col1.metric("Skill Match %", f"{match_percent}%")
             col2.metric("Semantic Similarity", f"{semantic_score}%")
-
-            st.text(f"DEBUG: HuggingFace raw response = {response.text}")
             
             with st.expander("📄 View Extracted Resume Text"):
                 st.text(resume_text)
