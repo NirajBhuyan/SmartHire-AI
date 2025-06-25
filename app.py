@@ -9,8 +9,14 @@ st.write("✅ Checkpoint 2: All imports successful")
 
 #from recommendations import recommend_skills
 from utils.pdf_parser import extract_text
+st.write("✅ Checkpoint 2.1: pdf_parser imported")
+
 from resume_matcher import extract_skills, match_skills, get_semantic_score
+st.write("✅ Checkpoint 2.2: resume_matcher imported")
+
 import matplotlib.pyplot as plt
+st.write("✅ Checkpoint 2.3: matplotlib imported")
+
 st.write("✅ Checkpoint 3: Custom modules loaded")
 
 st.set_page_config(
