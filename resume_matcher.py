@@ -48,11 +48,7 @@ skill_keywords = [
 
 def extract_skills(text):
     text = text.lower()
-    extracted = []
-    for keyword in skill_keywords:
-        if keyword in text:
-            extracted.append(keyword)
-    return extracted
+    return [kw for kw in skill_keywords if kw in text]
 
 def match_skills(resume_skills, jd_skills):
     matched = list(set(resume_skills) & set(jd_skills))
@@ -61,8 +57,7 @@ def match_skills(resume_skills, jd_skills):
     return matched, missing, percent
 
 def get_semantic_score(resume_text, jd_text):
-    # Placeholder semantic score until BERT is added back
-    return 0.0
+    return 0.0  # No heavy model yet
 
 #def extract_skills(text):
 #    doc = nlp(text.lower())
