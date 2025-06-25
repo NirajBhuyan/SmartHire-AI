@@ -12,24 +12,29 @@ st.write("🔄 Checking spaCy model...")
 
 # Download spaCy model (safe on Streamlit)
 
-print("🔍 Checkpoint 2.2: Starting spaCy check...")
-
 try:
-    if not spacy.util.is_package("en_core_web_sm"):
-        spacy.cli.download("en_core_web_sm")
-        print("✅ spaCy model downloaded (if needed)")
     nlp = spacy.load("en_core_web_sm")
-    print("✅ spaCy model loaded")
-except Exception as e:
-    st.error("❌ Failed to load spaCy model")
-    st.text(str(e))
+except OSError:
+    import subprocess
+    subprocess.run(["python", "-m", "spacy", "download", "en_core_web_sm"])
+    nlp = spacy.load("en_core_web_sm")
+    st.success("✅ spaCy model loaded successfully")
+
+#try:
+#    if not spacy.util.is_package("en_core_web_sm"):
+#        spacy.cli.download("en_core_web_sm")
+#        print("✅ spaCy model downloaded (if needed)")
+#    nlp = spacy.load("en_core_web_sm")
+#    print("✅ spaCy model loaded")
+#except Exception as e:
+#    st.error("❌ Failed to load spaCy model")
+#    st.text(str(e))
 
 # Load BERT model only once
 st.write("🔄 Loading BERT model...")
 try:
     bert_model = SentenceTransformer('all-MiniLM-L6-v2')
-    print("✅ BERT model loaded")
-    st.write("✅ BERT model loaded")
+    st.success("✅ BERT model loaded")
 except Exception as e:
     st.error("❌ Failed to load BERT model")
     st.text(str(e))
