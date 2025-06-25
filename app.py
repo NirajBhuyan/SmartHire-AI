@@ -69,6 +69,7 @@ with tab1:
             jd_skills = extract_skills(jd_text)
             matched_skills, missing_skills, match_percent = match_skills(resume_skills, jd_skills)
             semantic_score = get_semantic_similarity(resume_text, jd_text)
+            st.metric("Semantic Similarity", f"{semantic_score}%")
             
             log_results(match_percent, semantic_score, matched_skills, missing_skills) 
 
@@ -77,6 +78,8 @@ with tab1:
             col1.metric("Skill Match %", f"{match_percent}%")
             col2.metric("Semantic Similarity", f"{semantic_score}%")
 
+            st.text(f"DEBUG: HuggingFace raw response = {response.text}")
+            
             with st.expander("📄 View Extracted Resume Text"):
                 st.text(resume_text)
 
