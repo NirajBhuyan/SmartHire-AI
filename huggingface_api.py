@@ -18,17 +18,17 @@ def get_semantic_similarity(resume_text, jd_text):
             }
         }
 
-        res = requests.post(API_URL, headers=HEADERS, json=payload)
+        response = requests.post(API_URL, headers=HEADERS, json=payload)
 
-        if res.status_code == 200:
-            result = res.json()
+        if response.status_code == 200:
+            result = response.json()
             if isinstance(result, list) and isinstance(result[0], float):
                 return round(result[0] * 100, 2)
             else:
                 print("⚠️ Unexpected format:", result)
                 return 0.0
         else:
-            print(f"❌ Hugging Face API Error: {res.status_code} - {res.text}")
+            print(f"❌ Hugging Face API Error: {response.status_code} - {response.text}")
             return 0.0
 
     except Exception as e:
