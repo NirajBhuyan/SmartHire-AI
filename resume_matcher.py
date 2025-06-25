@@ -13,6 +13,8 @@ st.write("🔄 Checking spaCy model...")
 # Download spaCy model (safe on Streamlit)
 
 nlp = spacy.load("en_core_web_sm")
+st.success("✅ spaCy model loaded")
+
 
 #try:
 #    if not spacy.util.is_package("en_core_web_sm"):
@@ -40,6 +42,7 @@ skill_keywords = [
     "excel", "power bi", "tableau", "aws", "azure", "communication",
     "problem-solving", "numpy", "pandas", "matplotlib", "statistics"
 ]
+
 def extract_skills(text):
     doc = nlp(text.lower())
     extracted = set()
