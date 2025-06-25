@@ -4,6 +4,12 @@ st.write("✅ Checkpoint 1: App started")
 import os
 import pandas as pd
 from logger import log_results
+import logging
+
+# ✅ Logging setup
+logging.basicConfig(level=logging.DEBUG)
+st.write("📋 Logging started...")
+logging.debug("✅ Checkpoint: App started")
 
 st.write("✅ Checkpoint 2: All imports successful")
 
