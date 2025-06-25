@@ -70,6 +70,7 @@ with tab1:
             matched_skills, missing_skills, match_percent = match_skills(resume_skills, jd_skills)
             semantic_score = get_semantic_similarity(resume_text, jd_text)
             st.metric("Semantic Similarity", f"{semantic_score}%")
+            print("🔁 Calculated Semantic Score:", semantic_score)
             
             log_results(match_percent, semantic_score, matched_skills, missing_skills) 
 
