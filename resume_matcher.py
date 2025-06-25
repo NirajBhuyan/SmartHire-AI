@@ -12,9 +12,12 @@ st.write("🔄 Checking spaCy model...")
 
 # Download spaCy model (safe on Streamlit)
 
-nlp = spacy.load("en_core_web_sm")
-st.success("✅ spaCy model loaded")
-
+try:
+    nlp = spacy.load("en_core_web_sm")
+    st.success("✅ spaCy model loaded")
+except:
+    import sys
+    sys.exit("❌ spaCy model en_core_web_sm not found. Make sure it's in requirements.txt.")
 
 #try:
 #    if not spacy.util.is_package("en_core_web_sm"):
