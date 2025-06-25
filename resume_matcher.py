@@ -2,10 +2,10 @@ import streamlit as st
 st.write("📦 Entered resume_matcher.py")
 
 from utils.pdf_parser import extract_text_from_pdf
-
 import spacy
-import spacy.cli
-import importlib.util
+
+#import spacy.cli
+#import importlib.util
 #from sentence_transformers import SentenceTransformer, util
 
 st.write("🔄 Checking spaCy model...")
