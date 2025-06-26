@@ -1,9 +1,13 @@
 streamlit
 python-docx
 pdfplumber
+pyPDF2
+pyMuPDF
+pdfminer.six
 scikit-learn
 matplotlib
 numpy
 nltk
+regex
 sentence-transformers
 pandas
