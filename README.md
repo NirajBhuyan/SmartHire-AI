@@ -1,81 +1,62 @@
-
-# 🤖 SmartHire AI
-
-**SmartHire AI** is an AI-powered Resume Matcher and Career Recommendation tool built with Streamlit.  
-It analyzes your resume against job descriptions, matches skills, calculates semantic relevance, and offers career-enhancing insights.
-
----
+# 🤖 SmartHire-AI
+SmartHire-AI is a real-time AI-powered web application that analyzes resumes and job descriptions to calculate skill match percentage and semantic similarity. It helps job seekers and recruiters assess compatibility between candidate profiles and job requirements using Natural Language Processing (NLP).
 
 ## 🚀 Features
 
-- 📄 Upload Resume (PDF/DOCX) & Job Description
-- ✅ Extract skills and keywords from both documents
-- 🎯 Highlight Matched and Missing Skills
-- 🤖 Semantic Similarity using BERT embeddings
-- 📊 Visual charts (Pie & Bar) for skill insights
-- 📥 CSV Log of all analysis results
-- ☁️ Deployed with Streamlit Cloud
+- 📄 Upload Resume (PDF/DOCX)
+- 📝 Upload Job Description (PDF/DOCX)
+- ✅ Extracts raw text from both documents
+- 🧠 Calculates:
+  - **Skill Match Percentage**
+  - **Semantic Similarity Score** using transformer-based embeddings
+- 📊 Visualizes results via pie charts and bar graphs
+- 📁 Match History Logging to CSV
+- 🌐 Deployed using [Streamlit Cloud](https://streamlit.io/cloud)
 
----
+## 🧠 NLP & AI Stack
 
-## 🛠️ Tech Stack
+- **Hugging Face Transformers**
+  - Model used: [`paraphrase-MiniLM-L6-v2`](https://huggingface.co/sentence-transformers/paraphrase-MiniLM-L6-v2)
+  - Library: [`sentence-transformers`](https://www.sbert.net/)
+  - Purpose: Computes semantic similarity between resume and job description using sentence embeddings.
 
-- **Python**
-- **Streamlit** for UI
-- **PDFPlumber / python-docx** for file parsing
-- **Scikit-learn / SentenceTransformers** for AI logic
-- **Pandas / Matplotlib** for logging & visualization
+- **spaCy** (optional/local usage)
+  - For keyword-based skill extraction
 
----
+- **Matplotlib & Pandas**: For visualization and match history logging
 
-## 📁 Folder Structure
+## 🛠 Tech Stack
 
-```
-SmartHire-AI/
-├── app.py                      # Main Streamlit App
-├── resume_matcher.py          # Skill Matching Logic
-├── logger.py                  # CSV Logger
-├── utils/
-│   └── pdf_parser.py          # Resume/Job parsing
-├── output/
-│   └── match_log.csv          # Auto-generated analysis logs
-├── .streamlit/
-│   └── config.toml            # Custom Theme
-├── requirements.txt           # Python dependencies
-```
+- Python 3.8+
+- Streamlit
+- Hugging Face Transformers (`sentence-transformers`)
+- Pandas, Matplotlib
+- pdfplumber, python-docx
 
----
-
-## ⚙️ Setup Instructions
-
-### 1. Clone the Repo
+## 📦 Setup Instructions
 
 ```bash
 git clone https://github.com/your-username/SmartHire-AI.git
 cd SmartHire-AI
-```
 
-### 2. Install Dependencies
+# Create virtual environment
+python -m venv venv
+source venv/bin/activate  # or .\venv\Scripts\activate on Windows
 
-```bash
+# Install dependencies
 pip install -r requirements.txt
-```
 
-### 3. Run the App
-
-```bash
+# Run the app
 streamlit run app.py
 ```
 
----
+## 🧪 Sample Files
 
-## 🙌 Credits
+- Sample Resume: `Resume test.docx`
+- Sample JD: `JD test.docx`
 
-Developed by [Niraj Pratim Bhuyan](https://github.com/NirajBhuyan)  
-Built with ❤️ using Streamlit + AI
 
----
+## 👨‍💻 Author
 
-## 📄 License
-
-This project is licensed under the [MIT License](LICENSE)
+- **Niraj Pratim Bhuyan**  
+  [LinkedIn](https://www.linkedin.com/in/yourprofile) | [GitHub](https://github.com/NirajBhuyan)
