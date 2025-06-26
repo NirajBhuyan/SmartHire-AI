@@ -1,3 +1,4 @@
+import traceback
 import streamlit as st
 import os
 import pandas as pd
@@ -99,7 +100,9 @@ with tab1:
             st.pyplot(fig2)
 
         except Exception as e:
-            st.error(f"❌ Error during processing: {e}")
+            st.error("❌ Error during processing:")
+            st.exception(e)
+            st.text(traceback.format_exc())
             st.stop()
 
 with tab2:
