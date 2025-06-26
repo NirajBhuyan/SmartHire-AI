@@ -3,10 +3,6 @@ python-docx
 pdfplumber
 scikit-learn
 matplotlib
-PyPDF2
-pyMuPDF
 numpy
-pdfminer.six
-regex
 nltk
 sentence-transformers
