@@ -2,10 +2,9 @@ import requests
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 
-# Correct endpoint for feature extraction
 API_URL = "https://api-inference.huggingface.co/pipeline/feature-extraction/sentence-transformers/paraphrase-MiniLM-L6-v2"
 HEADERS = {
-    "Authorization": "Bearer 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",  # Replace with your actual token
+    "Authorization": "Bearer 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",  # ✅ Replace with your valid token
     "Content-Type": "application/json"
 }
 
@@ -13,10 +12,11 @@ def get_semantic_similarity(resume_text, jd_text):
     try:
         def get_embedding(text):
             response = requests.post(API_URL, headers=HEADERS, json={"inputs": text})
+            print("🔍 API Response Code:", response.status_code)
+            print("🔍 API Response Body:", response.text)
             if response.status_code == 200:
-                return np.mean(response.json(), axis=0)  # Average pooling
+                return np.mean(response.json(), axis=0)
             else:
-                print("❌ API Error:", response.status_code, response.text)
                 return None
 
         resume_vec = get_embedding(resume_text[:512])
@@ -28,5 +28,5 @@ def get_semantic_similarity(resume_text, jd_text):
         else:
             return 0.0
     except Exception as e:
-        print("❌ Exception in similarity calculation:", str(e))
+        print("❌ Semantic Similarity Error:", str(e))
         return 0.0
