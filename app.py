@@ -79,8 +79,8 @@ with tab1:
 
             st.markdown("## 🧠 Analysis Results")
             col1, col2 = st.columns(2)
-            col1.metric("Skill Match %", f"{match_percent}%")
-            col2.metric("Semantic Similarity", f"{semantic_score}%")
+            col1.metric("Skill Match %", f"{round(match_percent), 2}%")
+            col2.metric("Semantic Similarity", f"{round(semantic_score), 2}%")
             
             with st.expander("📄 View Extracted Resume Text"):
                 st.text(resume_text)
