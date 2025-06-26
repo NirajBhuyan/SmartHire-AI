@@ -9,7 +9,6 @@ from huggingface_api import get_semantic_similarity
 try:
     from resume_matcher import extract_skills, match_skills
 except Exception as e:
-    import traceback
     st.error("❌ Failed to import resume_matcher")
     st.text(traceback.format_exc())
 
