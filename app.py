@@ -39,7 +39,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.markdown("<h1 class='title-text'>🤖 SmartHire AI</h1>", unsafe_allow_html=True)
-st.markdown("<p class='subheader-text'>AI-powered Resume Matcher & Career Recommender</p>", unsafe_allow_html=True)
+st.markdown("<p class='subheader-text'>AI-Powered Resume Matcher with Skill & Semantic Scoring</p>", unsafe_allow_html=True)
 
 tab1, tab2 = st.tabs(["📂 Resume Matcher", "📊 Match History"])
 
