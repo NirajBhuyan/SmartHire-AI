@@ -1,10 +1,10 @@
-import traceback
 import streamlit as st
 import os
 import pandas as pd
 from logger import log_results
 from utils.pdf_parser import extract_text
 from huggingface_api import get_semantic_similarity
+import traceback
 
 try:
     from resume_matcher import extract_skills, match_skills
@@ -71,10 +71,7 @@ with tab1:
             match_percent = round(match_percent, 2)
             semantic_score = round(get_semantic_similarity(resume_text, jd_text), 2)
             #st.metric("Semantic Similarity", f"{semantic_score}%")
-            #print("🔁 Calculated Semantic Score:", semantic_score)
-            #st.text(f"DEBUG: Semantic Similarity Raw Score = {semantic_score}")
 
-            
             log_results(match_percent, semantic_score, matched_skills, missing_skills) 
 
             st.markdown("## 🧠 Analysis Results")
