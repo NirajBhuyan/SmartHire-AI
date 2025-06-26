@@ -68,7 +68,8 @@ with tab1:
             resume_skills = extract_skills(resume_text)
             jd_skills = extract_skills(jd_text)
             matched_skills, missing_skills, match_percent = match_skills(resume_skills, jd_skills)
-            semantic_score = get_semantic_similarity(resume_text, jd_text)
+            match_percent = round(match_percent, 2)
+            semantic_score = round(get_semantic_similarity(resume_text, jd_text), 2)
             #st.metric("Semantic Similarity", f"{semantic_score}%")
             #print("🔁 Calculated Semantic Score:", semantic_score)
             #st.text(f"DEBUG: Semantic Similarity Raw Score = {semantic_score}")
@@ -78,8 +79,8 @@ with tab1:
 
             st.markdown("## 🧠 Analysis Results")
             col1, col2 = st.columns(2)
-            col1.metric("Skill Match %", f"{round(match_percent, 2)}%")
-            col2.metric("Semantic Similarity", f"{round(semantic_score, 2)}%")
+            col1.metric("Skill Match %", f"{match_percent}%")
+            col2.metric("Semantic Similarity", f"{semantic_score}%")
             
             with st.expander("📄 View Extracted Resume Text"):
                 st.text(resume_text)
