@@ -10,3 +10,4 @@ pdfminer.six
 regex
 nltk
 requests
+sentence-transformers
